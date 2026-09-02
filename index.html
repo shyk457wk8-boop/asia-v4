@@ -1,18 +1,12 @@
-<!doctype html>
-
-<html lang="ar" dir="rtl">
-
-<head>
+<!doctype html><html lang="ar" dir="rtl"><head>
 
 <meta charset="utf-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<meta name="theme-color" content="#061b2d">
+<meta name="theme-color" content="#062033">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
-
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <meta name="apple-mobile-web-app-title" content="آسيا">
 
@@ -20,28 +14,36 @@
 
 <style>
 
-*{box-sizing:border-box}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(#061b2d,#087f91);color:#fff;font-family:-apple-system,Arial;min-height:100vh}.app{max-width:520px;margin:auto;padding:25px 18px}.top{display:flex;justify-content:space-between;align-items:center}.brand{font-size:36px;font-weight:bold}.hero{text-align:center}.orb{margin:35px auto 20px;width:140px;height:140px;border-radius:50%;display:grid;place-items:center;font-size:50px;background:#12abc4}.chat{margin-top:25px;padding:15px;border-radius:24px;background:#ffffff18}.messages{min-height:260px;max-height:390px;overflow:auto}.msg{padding:12px;margin:10px 0;border-radius:16px;background:#ffffff20}.user{background:#09a9c3}.row{display:flex;gap:7px}input{flex:1;padding:15px;border:0;border-radius:25px;font-size:17px}button{border:0;border-radius:25px;padding:12px;background:#09a9c3;color:white;font-size:16px}
 
-body{
+</style></head><body><main class="app">
 
- margin:0;
+<div class="top"><b class="brand">آسيا</b><span>🟢 مجانية</span></div>
 
- font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+<div class="hero"><div class="orb">آ</div><h1>هلا حيدر، وياك آسيا</h1><p>مساعدتك المجانية على الآيفون</p></div>
 
- background:linear-gradient(#061b2d,#087f91);
+<div class="chat"><div id="m" class="messages"><div class="msg">أهلاً حيدر 🌿 آني آسيا. گلي شتريد.</div></div>
 
- color:white;
+<form id="f" class="row"><input id="q" placeholder="اكتب لآسيا..."><button>إرسال</button></form>
 
- min-height:100vh
+<div class="row" style="margin-top:10px"><button type="button" onclick="search()">🔎 بحث الإنترنت</button><button type="button" onclick="voice()">🎤 صوت</button></div>
 
-}
+</div></main>
 
-.app{max-width:520px;margin:auto;min-height:100vh;padding:24px 18px}
+<script>
 
-.top{display:flex;align-items:center;justify-content:space-between}
+const q=document.getElementById('q'),m=document.getElementById('m');
 
-.brand{font-size:34px;font-weight:800}
+function add(t,c=''){let d=document.createElement('div');d.className='msg '+c;d.textContent=t;m.appendChild(d);m.scrollTop=m.scrollHeight}
 
-.status{font-size:14px;opacity:.9}
+function say(t){try{let u=new SpeechSynthesisUtterance(t);u.lang='ar-IQ';speechSynthesis.speak(u)}catch(e){}}
 
-.dot{display:inline-block;width:10px;height:10px
+function answer(t){let r='حيدر، آني حالياً بالنسخة المجانية. أگدر أحچي وياك وأفتح لك بحث بالإنترنت.';if(/مرحبا|هلا|السلام/.test(t))r='هلا وغلا حيدر 🌿 آمرني.';if(/اسمك|اسمج/.test(t))r='اسمي آسيا، مساعدتك.';add(r);say(r)}
+
+document.getElementById('f').onsubmit=e=>{e.preventDefault();let t=q.value.trim();if(!t)return;add(t,'user');q.value='';answer(t)}
+
+function search(){let t=q.value.trim();if(!t){add('اكتب شنو تريد أبحث عنه.');return}window.open('https://www.google.com/search?q='+encodeURIComponent(t),'_blank')}
+
+function voice(){let R=window.SpeechRecognition||window.webkitSpeechRecognition;if(!R){add('إذا المايك ما اشتغل، استخدم مايك كيبورد الآيفون.');return}let r=new R();r.lang='ar-IQ';r.onresult=e=>{q.value=e.results[0][0].transcript};r.start()}
+
+</script></body></html>
